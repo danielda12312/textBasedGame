@@ -6,6 +6,7 @@ public class Inventory {
     private ArrayList<Item> items;
 
     //Use a constructor to initialize items as an arrayList that serves as our inventory.
+    //the constructor allows us to create an inventory OBJECT in Main and use its attributes and methods.
     public Inventory()
     {
         items = new ArrayList<>();
@@ -21,7 +22,7 @@ public class Inventory {
     public void displayInventory() {
         for (Item item : items)
         {
-            System.out.println("Item: " + item.getName() + ", Quantity: " + item.getQuantity());
+            item.displayInfo();
         }
     }
 }
