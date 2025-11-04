@@ -2,12 +2,15 @@ public class Main {
     public static void main(String[] args) {
        Inventory inventory = new Inventory();
        //Item item1 = new Item("Apple", 4);
-        Fruit fruit = new Fruit("Apple", 4,"Fuji");
+        Food fruit = new Food("Apple", 4,"Fruit");
        //Item item2 = new Item("Black Sword", 2, "Sword");
-        Weapon weapon = new Weapon("Black Sword", 2, "Sword", 25);
+        GreatSword greatSword = new GreatSword("Great Sword", 1, "Sword", 45, 3.4);
 
-       inventory.addItem(weapon);
+        GreatAxe greatAxe = new GreatAxe("Great Axe", 1, "Axe", 55, 4.4);
+
+       inventory.addItem(greatSword);
        inventory.addItem(fruit);
+       inventory.addItem(greatAxe);
        inventory.displayInventory();
 
     }

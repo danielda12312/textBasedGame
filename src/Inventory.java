@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Inventory {
 
     //Declare a dynamic array called items.
+    private static final int maxSize = 15;
     private ArrayList<Item> items;
 
     //Use a constructor to initialize items as an arrayList that serves as our inventory.
@@ -15,7 +16,11 @@ public class Inventory {
     //A method to add items to the inventory.
     public void addItem(Item item)
     {
-        items.add(item);
+        if(items.size() < maxSize) {
+            items.add(item);
+        }else {
+            System.out.println("Cannot add " + item + " inventory is full.");
+        }
     }
 
     //A method to display what is inside our inventory.

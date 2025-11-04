@@ -1,10 +1,12 @@
-public class Weapon extends Item{
+public abstract class Weapon extends Item{
     private int damage;
+    private double weight;
 
-    public Weapon(String name, int quantity, String type, int damage)
+    public Weapon(String name, int quantity, String type, int damage, double weight)
     {
         super(name, quantity, type);
         this.damage = damage;
+        this.weight = weight;
     }
 
     int getDamage()
@@ -12,9 +14,11 @@ public class Weapon extends Item{
         return damage;
     }
 
-    @Override
-    public void displayInfo()
+    double getWeight()
     {
-        System.out.println("Weapon: " + getName() + ", Quantity: " + getQuantity() + ", Type: " + getType() + ", Damage: " + damage);
+        return weight;
     }
+
+    @Override
+    public abstract void displayInfo();
 }
