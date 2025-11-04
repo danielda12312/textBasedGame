@@ -1,7 +1,7 @@
 public abstract class Item {
-    private String name;
+    private final String name;
     private int quantity;
-    private String type;
+    private final String type;
 
 
     //The constructor allows us to create an Item object in Main so we can use its attributes and methods.

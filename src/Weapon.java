@@ -1,6 +1,6 @@
 public abstract class Weapon extends Item{
-    private int damage;
-    private double weight;
+    private final int damage;
+    private final double weight;
 
     public Weapon(String name, int quantity, String type, int damage, double weight)
     {

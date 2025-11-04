@@ -14,20 +14,38 @@ public class Inventory {
     }
 
     //A method to add items to the inventory.
-    public void addItem(Item item)
+    public boolean addItem(Item item)
     {
         if(items.size() < maxSize) {
             items.add(item);
+            return true;
         }else {
-            System.out.println("Cannot add " + item + " inventory is full.");
+            System.out.println("Cannot add " + item.getName() + " inventory is full.");
+            return false;
+        }
+    }
+
+    public boolean removeItem(Item item)
+    {
+        if(items.remove(item))
+        {
+            System.out.println(item.getName() + " removed from the inventory.");
+            return true;
+        }else {
+            System.out.println(item.getName() + " not found in the inventory.");
+            return false;
         }
     }
 
     //A method to display what is inside our inventory.
     public void displayInventory() {
-        for (Item item : items)
+        if(items.isEmpty())
         {
-            item.displayInfo();
+            System.out.println("Inventory is empty.");
+        }else {
+            for (Item item : items) {
+                item.displayInfo();
+            }
         }
     }
 }

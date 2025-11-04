@@ -1,9 +1,10 @@
 public class Food extends Item{
-    private String type;
+    private int hpRestore;
 
-    public Food(String name, int quantity, String type)
+    public Food(String name, int quantity, String type, int hpRestore)
     {
         super(name,quantity, type);
+        this.hpRestore = hpRestore;
     }
 
     @Override
