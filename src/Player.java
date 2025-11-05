@@ -2,12 +2,14 @@ public class Player {
     private String name;
     private int hp;
     private Inventory inventory;
+    private Weapon currentWeapon;
 
-    public Player(String name, int hp)
+    public Player(int hp)
     {
         this.name = name;
         this.hp = hp;
         this.inventory = new Inventory();
+        this.currentWeapon = currentWeapon;
     }
 
     public int getHp()
@@ -18,6 +20,16 @@ public class Player {
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setCurrentWeapon(Weapon currentWeapon)
+    {
+        this.currentWeapon = currentWeapon;
     }
 
     public void pickUpItem(Item item)

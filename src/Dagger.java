@@ -1,10 +1,8 @@
-public class GreatAxe extends Weapon{
-
-    public GreatAxe(String name, int quantity, String type, int damage, double weight)
+public class Dagger extends Weapon {
+    public Dagger(String name, int quantity, String type, int damage, double weight)
     {
         super(name, quantity, type, damage, weight);
     }
-
 
     @Override
     public void displayInfo() {

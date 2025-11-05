@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
+    String name;
+    Dagger defaultWeapon;
 
     private boolean running = true;
 
@@ -13,18 +15,28 @@ public class Main {
     public void startGame()
     {
         Scanner scanner = new Scanner(System.in);
+        Player player = new Player(100);
 
-        System.out.println("Welcome to my first game!");
+
+        //  Create a playerSetup function inside Player (maybe) and invoke it here to set name, initial weapon and hp.
+        defaultWeapon = new Dagger("knife", 1 , "dagger", 10 , 0.3);
+        System.out.print("Please choose a name for your Character: ");
+        name = scanner.nextLine();
+        player.setName(name);
+        player.setCurrentWeapon(defaultWeapon);
+
+        System.out.println("Hello " + name + ", Welcome to my first game!\n");
+        System.out.println("-------------------------------------------------\n");
+        System.out.println("You wake up in a dimly lit room, you look around and see a door, window and a knife on the floor.");
+        System.out.println("You pick up the knife and a couple of apples laying on the desk next to the window.");
+        System.out.println("What's your next move? ( for list of commands write commands )");
+
 
         while(running)
         {
-            System.out.println("You wake up in a dimly lit room, you see a window and a door.");
-
-            System.out.println("What's your next move? ( for list of commands write commands )");
             String input = scanner.nextLine();
 
             processInput(input);
-
         }
     }
 
@@ -49,8 +61,14 @@ public class Main {
             case "quit":
                 running = false;
                 break;
+            case "name":
+                System.out.println("Your name is: " + name);
+                break;
+            case "weapon":
+                System.out.println("You have a " + defaultWeapon.getName() + " in your hands.");
+                break;
             default:
-                System.out.println("I don't your command.");
+                System.out.println("I don't understand your command.");
                 break;
         }
     }
