@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     String name;
-    Dagger defaultWeapon;
+    Weapon currentWeapon;
 
     private boolean running = true;
 
@@ -19,13 +19,9 @@ public class Main {
 
 
         //  Create a playerSetup function inside Player (maybe) and invoke it here to set name, initial weapon and hp.
-        defaultWeapon = new Dagger("knife", 1 , "dagger", 10 , 0.3);
-        System.out.print("Please choose a name for your Character: ");
-        name = scanner.nextLine();
-        player.setName(name);
-        player.setCurrentWeapon(defaultWeapon);
+        player.playerSetup();
 
-        System.out.println("Hello " + name + ", Welcome to my first game!\n");
+        System.out.println("Hello " + player.getName() + ", Welcome to my first game!\n");
         System.out.println("-------------------------------------------------\n");
         System.out.println("You wake up in a dimly lit room, you look around and see a door, window and a knife on the floor.");
         System.out.println("You pick up the knife and a couple of apples laying on the desk next to the window.");
@@ -36,13 +32,14 @@ public class Main {
         {
             String input = scanner.nextLine();
 
-            processInput(input);
+            processInput(input, player);
         }
     }
 
-    private void processInput(String input)
+    private void processInput(String input, Player player)
     {
         String command = input.toLowerCase().trim();
+        Weapon weapon = player.getCurrentWeapon();
 
         switch (command)
         {
@@ -62,10 +59,15 @@ public class Main {
                 running = false;
                 break;
             case "name":
-                System.out.println("Your name is: " + name);
+                System.out.println("Your name is: " + player.getName());
                 break;
             case "weapon":
-                System.out.println("You have a " + defaultWeapon.getName() + " in your hands.");
+                if (weapon != null) {
+                    System.out.println("You have a " + weapon.getName() + " in your hands.");
+                }else
+                {
+                    System.out.println("You don't have a weapon equipped.");
+                }
                 break;
             default:
                 System.out.println("I don't understand your command.");

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Player {
     private String name;
     private int hp;
@@ -6,10 +8,8 @@ public class Player {
 
     public Player(int hp)
     {
-        this.name = name;
         this.hp = hp;
         this.inventory = new Inventory();
-        this.currentWeapon = currentWeapon;
     }
 
     public int getHp()
@@ -20,6 +20,11 @@ public class Player {
     public String getName()
     {
         return name;
+    }
+
+    public Weapon getCurrentWeapon()
+    {
+        return currentWeapon;
     }
 
     public void setName(String name)
@@ -47,5 +52,16 @@ public class Player {
     {
         System.out.println("\n" + name + "'s Inventory: ");
         inventory.displayInventory();
+    }
+
+    public void playerSetup()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please choose a name for your Character: ");
+        name = scanner.nextLine();
+        setName(name);
+
+        Dagger dagger = new Dagger("Dagger", 1, "dagger", 10, 0.6);
+        setCurrentWeapon(dagger);
     }
 }
