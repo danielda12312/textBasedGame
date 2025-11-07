@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,19 +19,46 @@ public class Main {
         player.playerSetup();
 
 
+        String[] greetText = {
+        "Hello " + player.getName() + ", Welcome to my first game!\n",
+        "-------------------------------------------------\n",
+        "You wake up in a dimly lit room, you look around and see a door, window and a knife on the floor.",
+        "You pick up the knife and a couple of apples laying on the desk next to the window.",
+        "What's your next move? ( for list of commands write commands )"
+        };
 
-        System.out.println("Hello " + player.getName() + ", Welcome to my first game!\n");
-        System.out.println("-------------------------------------------------\n");
-        System.out.println("You wake up in a dimly lit room, you look around and see a door, window and a knife on the floor.");
-        System.out.println("You pick up the knife and a couple of apples laying on the desk next to the window.");
-        System.out.println("What's your next move? ( for list of commands write commands )");
+        int delayMilliseconds = 1000;
+
+        for (String text : greetText)
+        {
+            System.out.println(text);
+            try {
+                Thread.sleep(delayMilliseconds);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Thread interrupted during slow print.");
+            }
+        }
 
 
         while(running)
         {
+
             String input = scanner.nextLine();
 
+            Room room1 = new Room("Room1", "An almost empty room with barely any light, only a desk" +
+                    " with a mirror attached to it and a note on the desk as well as an exit to the north.");
+            player.setCurrentRoom(room1);
+
+            Room room2 = new Room("Room2", "a bad that is covered in blood next to it you see a small shelf with one drawer" +
+                    "and in the corner a shadowy figure with bright eyes, it seems like it is scared of you.");
+
             processInput(input, player);
+
+            player.setCurrentRoom(room2);
+
+
+
         }
     }
 
@@ -42,8 +70,10 @@ public class Main {
         switch (command)
         {
             case "look around":
-                System.out.println("You carefully examine your surroundings.");
+                System.out.println("You carefully examine your surroundings and you see ");
                 //Learn how to show each description based on players "Location".
+                System.out.println("Room number: " + player.getCurrentRoom().getName());
+                System.out.println(player.getCurrentRoom().getDescription());
                 break;
             case "move north":
                 System.out.println("You tried to move north but hit a wall.");

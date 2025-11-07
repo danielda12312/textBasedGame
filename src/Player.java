@@ -5,6 +5,7 @@ public class Player {
     private int hp;
     private Inventory inventory;
     private Weapon currentWeapon;
+    private Room currentRoom;
 
     public Player(int hp)
     {
@@ -27,6 +28,11 @@ public class Player {
         return currentWeapon;
     }
 
+    public Room getCurrentRoom()
+    {
+        return currentRoom;
+    }
+
     public void setName(String name)
     {
         this.name = name;
@@ -35,6 +41,11 @@ public class Player {
     public void setCurrentWeapon(Weapon currentWeapon)
     {
         this.currentWeapon = currentWeapon;
+    }
+
+    public void setCurrentRoom(Room currentRoom)
+    {
+        this.currentRoom = currentRoom;
     }
 
     public void pickUpItem(Item item)
