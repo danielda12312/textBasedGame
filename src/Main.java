@@ -7,7 +7,12 @@ public class Main {
 
     public static void main(String[] args)
     {
+
+        GameLogic.printHeader("WELCOME TO MY FIRST GAME !");
+        GameLogic.anythingToContinue();
+        GameLogic.clearConsole();
         Main game = new Main();
+
         game.startGame();
     }
 
@@ -16,29 +21,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Player player = new Player(100);
 
+        GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
         player.playerSetup();
+        System.out.println("\nWelcome " + player.getName());
+        GameLogic.anythingToContinue();
+        GameLogic.clearConsole();
 
 
-        String[] greetText = {
-        "Hello " + player.getName() + ", Welcome to my first game!\n",
-        "-------------------------------------------------\n",
-        "You wake up in a dimly lit room, you look around and see a door, window and a knife on the floor.",
-        "You pick up the knife and a couple of apples laying on the desk next to the window.",
-        "What's your next move? ( for list of commands write commands )"
-        };
+        Room room1 = new Room("Room1", "An almost empty room with barely any light, only a desk" +
+                " with a mirror attached to it and a note on the desk as well as an exit to the north.");
+        player.setCurrentRoom(room1);
+        System.out.print("You wake up in ");
+        System.out.println(player.getCurrentRoom().getDescription());
 
-        int delayMilliseconds = 1000;
+        System.out.println("(For list of commands type \"commands\")");
 
-        for (String text : greetText)
-        {
-            System.out.println(text);
-            try {
-                Thread.sleep(delayMilliseconds);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.err.println("Thread interrupted during slow print.");
-            }
-        }
 
 
         while(running)
@@ -46,18 +43,7 @@ public class Main {
 
             String input = scanner.nextLine();
 
-            Room room1 = new Room("Room1", "An almost empty room with barely any light, only a desk" +
-                    " with a mirror attached to it and a note on the desk as well as an exit to the north.");
-            player.setCurrentRoom(room1);
-
-            Room room2 = new Room("Room2", "a bad that is covered in blood next to it you see a small shelf with one drawer" +
-                    "and in the corner a shadowy figure with bright eyes, it seems like it is scared of you.");
-
             processInput(input, player);
-
-            player.setCurrentRoom(room2);
-
-
 
         }
     }
@@ -81,7 +67,7 @@ public class Main {
                 break;
             case "commands":
                 System.out.println("Commands: ");
-                System.out.println("1. Look around\n 2. Move north\n 3. Look around\n 4. quit\n 5. name\n 6. weapon");
+                System.out.println(" 1. Look around\n 2. Move north\n 3. commands\n 4. quit\n 5. name\n 6. weapon");
                 break;
             case "quit":
                 running = false;
