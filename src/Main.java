@@ -17,13 +17,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Player player = new Player(100);
 
+        player.playerSetup();
 
-        //  Create a playerSetup function inside Player (maybe) and invoke it here to set name, initial weapon and hp.
-        defaultWeapon = new Dagger("knife", 1 , "dagger", 10 , 0.3);
-        System.out.print("Please choose a name for your Character: ");
-        name = scanner.nextLine();
-        player.setName(name);
-        player.setCurrentWeapon(defaultWeapon);
 
         System.out.println("Hello " + name + ", Welcome to my first game!\n");
         System.out.println("-------------------------------------------------\n");
