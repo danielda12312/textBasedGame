@@ -68,11 +68,13 @@ public class Player {
     public void playerSetup()
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please choose a name for your Character: ");
+        GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
         name = scanner.nextLine();
         setName(name);
 
         Dagger dagger = new Dagger("Dagger", 1, "dagger", 10, 0.6);
         setCurrentWeapon(dagger);
+        Food apple = new Food("Apple", 2, "fuji", 10);
+        inventory.addItem(apple);
     }
 }

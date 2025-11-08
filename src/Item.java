@@ -28,5 +28,9 @@ public abstract class Item {
 
     public abstract void displayInfo();
 
+    public String toString() {
+        return name;
+    }
+
 
 }

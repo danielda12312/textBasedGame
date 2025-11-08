@@ -18,10 +18,11 @@ public class Main {
 
     public void startGame()
     {
+        //TODO: Maybe* add an input function inside GameLogic class to handle all inputs from user.
         Scanner scanner = new Scanner(System.in);
         Player player = new Player(100);
 
-        GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
+
         player.playerSetup();
         System.out.println("\nWelcome " + player.getName());
         GameLogic.anythingToContinue();
@@ -40,8 +41,10 @@ public class Main {
 
         while(running)
         {
-
             String input = scanner.nextLine();
+
+            //TODO : make a note object and allow the user to "read" the note and get clues for next room.
+
 
             processInput(input, player);
 
@@ -51,7 +54,7 @@ public class Main {
     private void processInput(String input, Player player)
     {
         String command = input.toLowerCase().trim();
-        Weapon weapon = player.getCurrentWeapon();
+
 
         switch (command)
         {
@@ -61,13 +64,13 @@ public class Main {
                 System.out.println("Room number: " + player.getCurrentRoom().getName());
                 System.out.println(player.getCurrentRoom().getDescription());
                 break;
-            case "move north":
+            case "go north":
                 System.out.println("You tried to move north but hit a wall.");
                 // learn how to make movement smarter and more dynamic.
                 break;
             case "commands":
                 System.out.println("Commands: ");
-                System.out.println(" 1. Look around\n 2. Move north\n 3. commands\n 4. quit\n 5. name\n 6. weapon");
+                System.out.println(" 1. Look around\n 2. go north\n 3. commands\n 4. quit\n 5. name\n 6. weapon");
                 break;
             case "quit":
                 running = false;
@@ -76,13 +79,17 @@ public class Main {
                 System.out.println("Your name is: " + player.getName());
                 break;
             case "weapon":
-                if (weapon != null) {
-                    System.out.println("You have a " + weapon.getName() + " in your hands.");
+                if (player.getCurrentWeapon() != null) {
+                    System.out.println("You have a " + player.getCurrentWeapon() + " in your hands.");
                 }else
                 {
                     System.out.println("You don't have a weapon equipped.");
                 }
                 break;
+            case "inventory":
+                player.checkInventory();
+                break;
+            //TODO: Maybe add a case for "read note" here or just make an if else statement in game loop.
             default:
                 System.out.println("I don't understand your command.");
                 break;
