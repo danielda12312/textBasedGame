@@ -20,7 +20,7 @@ public class Main {
     {
         //TODO: Maybe* add an input function inside GameLogic class to handle all inputs from user.
         Scanner scanner = new Scanner(System.in);
-        Player player = new Player(100);
+        Player player = new Player();
 
 
         player.playerSetup();
@@ -89,7 +89,11 @@ public class Main {
             case "inventory":
                 player.checkInventory();
                 break;
-            //TODO: Maybe add a case for "read note" here or just make an if else statement in game loop.
+            case "hp":
+                int hp = player.getHp();
+                System.out.println("You have " + hp + " Health.");
+                break;
+                //TODO: Maybe add a case for "read note" here or just make an if else statement in game loop.
             default:
                 System.out.println("I don't understand your command.");
                 break;

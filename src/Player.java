@@ -7,9 +7,8 @@ public class Player {
     private Weapon currentWeapon;
     private Room currentRoom;
 
-    public Player(int hp)
+    public Player()
     {
-        this.hp = hp;
         this.inventory = new Inventory();
     }
 
@@ -21,6 +20,11 @@ public class Player {
     public String getName()
     {
         return name;
+    }
+
+    public void setHp(int hp)
+    {
+        this.hp = hp;
     }
 
     public Weapon getCurrentWeapon()
@@ -71,6 +75,7 @@ public class Player {
         GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
         name = scanner.nextLine();
         setName(name);
+        setHp(100);
 
         Dagger dagger = new Dagger("Dagger", 1, "dagger", 10, 0.6);
         setCurrentWeapon(dagger);
