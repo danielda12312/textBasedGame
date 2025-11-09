@@ -6,6 +6,7 @@ public class Player {
     private Inventory inventory;
     private Weapon currentWeapon;
     private Room currentRoom;
+    private Note note;
 
     public Player()
     {
@@ -22,11 +23,6 @@ public class Player {
         return name;
     }
 
-    public void setHp(int hp)
-    {
-        this.hp = hp;
-    }
-
     public Weapon getCurrentWeapon()
     {
         return currentWeapon;
@@ -35,6 +31,11 @@ public class Player {
     public Room getCurrentRoom()
     {
         return currentRoom;
+    }
+
+    public Note getNote()
+    {
+        return note;
     }
 
     public void setName(String name)
@@ -50,6 +51,16 @@ public class Player {
     public void setCurrentRoom(Room currentRoom)
     {
         this.currentRoom = currentRoom;
+    }
+
+    public void setHp(int hp)
+    {
+        this.hp = hp;
+    }
+
+    public void setNote(Note note)
+    {
+        this.note = note;
     }
 
     public void pickUpItem(Item item)
@@ -81,5 +92,10 @@ public class Player {
         setCurrentWeapon(dagger);
         Food apple = new Food("Apple", 2, "fuji", 10);
         inventory.addItem(apple);
+    }
+
+    public void readContent()
+    {
+
     }
 }

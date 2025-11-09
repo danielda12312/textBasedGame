@@ -16,6 +16,11 @@ public class Room {
         return exits.get(dir);
     }
 
+    public void setExit(Direction dir,Room room)
+    {
+        exits.put(dir, room);
+    }
+
     public String getName()
     {
         return name;
@@ -24,4 +29,5 @@ public class Room {
     public String getDescription() {
         return description;
     }
+
 }
