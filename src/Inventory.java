@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Inventory {
 
@@ -47,5 +48,14 @@ public class Inventory {
                 item.displayInfo();
             }
         }
+    }
+
+    public boolean checkForItem(Note note)
+    {
+        for (Item item: items) {
+            if (Objects.equals(item , note))
+                return false;
+        }
+        return true;
     }
 }

@@ -1,4 +1,6 @@
 public class Note extends Item{
+
+    //TODO: Make a class that represents all pickable items.
     private String content;
 
     public Note(String name, int quantity, String type, String content)

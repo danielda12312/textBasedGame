@@ -1,13 +1,12 @@
 
-import java.sql.SQLOutput;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
 
     private boolean running = true;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
         GameLogic.printHeader("THE FORGOTTEN CHAMBERS");
         GameLogic.anythingToContinue();
@@ -17,8 +16,7 @@ public class Main {
         game.startGame();
     }
 
-    public void startGame()
-    {
+    public void startGame() {
         //TODO: Maybe* add an input function inside GameLogic class to handle all inputs from user.
         Scanner scanner = new Scanner(System.in);
         Player player = new Player();
@@ -33,21 +31,11 @@ public class Main {
         GameLogic.setupWorld(player);
 
 
-
-
-
-
-        while(running)
-        {
+        while (running) {
             String input = scanner.nextLine();
 
 
-            Note note = new Note("note", 1, "paper", "The exit is to the north.");
-            player.setNote(note);
-
             //TODO: finish how i can go between rooms.
-
-
 
 
             processInput(input, player);
@@ -55,13 +43,11 @@ public class Main {
         }
     }
 
-    private void processInput(String input, Player player)
-    {
+    private void processInput(String input, Player player) {
         String command = input.toLowerCase().trim();
 
 
-        switch (command)
-        {
+        switch (command) {
             case "look around":
                 GameLogic.clearConsole();
                 System.out.println("You carefully examine your surroundings and you see ");
@@ -72,11 +58,10 @@ public class Main {
             case "go north":
                 GameLogic.clearConsole();
                 Room nextRoom = player.getCurrentRoom().getExit(Direction.NORTH);
-                if (player.getCurrentRoom().getExit(Direction.NORTH) != null)
-                {
+                if (player.getCurrentRoom().getExit(Direction.NORTH) != null) {
                     player.setCurrentRoom(nextRoom);
                     System.out.println("You have entered: " + player.getCurrentRoom().getName());
-                }else {
+                } else {
                     System.out.println("You tried to move north but hit a wall.");
                 }
 
@@ -85,11 +70,10 @@ public class Main {
             case "go south":
                 GameLogic.clearConsole();
                 nextRoom = player.getCurrentRoom().getExit(Direction.SOUTH);
-                if (player.getCurrentRoom().getExit(Direction.SOUTH) != null)
-                {
+                if (player.getCurrentRoom().getExit(Direction.SOUTH) != null) {
                     player.setCurrentRoom(nextRoom);
                     System.out.println("You have entered: " + player.getCurrentRoom().getName());
-                }else {
+                } else {
                     System.out.println("You cant go that way.");
                 }
                 break;
@@ -109,8 +93,7 @@ public class Main {
                 GameLogic.clearConsole();
                 if (player.getCurrentWeapon() != null) {
                     System.out.println("You have a " + player.getCurrentWeapon() + " in your hands.");
-                }else
-                {
+                } else {
                     System.out.println("You don't have a weapon equipped.");
                 }
                 break;
@@ -123,14 +106,25 @@ public class Main {
                 int hp = player.getHp();
                 System.out.println("You have " + hp + " Health.");
                 break;
-                //TODO: Maybe add a case for "read note" here or just make an if else statement in game loop.
-            case "pick up":
+            //TODO: Maybe add a case for "read note" here or just make an if else statement in game loop.
+            case "pick up note":
                 GameLogic.clearConsole();
-                player.pickUpItem(player.getNote());
+                if(Objects.equals(player.getCurrentRoom().getName(), "Room1") && player.checkItem())
+                {
+                    player.pickUpItem(player.getNote());
+                }else
+                {
+                    System.out.println("There is nothing to pick up");
+                }
                 break;
             case "read note":
                 GameLogic.clearConsole();
-                player.getNote().displayContent();
+                if(!player.checkItem()) {
+                    player.getNote().displayContent();
+                }else {
+                    System.out.println("You dont have that item.");
+                }
+
                 break;
             default:
                 System.out.println("I don't understand your command.");

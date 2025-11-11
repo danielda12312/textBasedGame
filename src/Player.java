@@ -94,8 +94,10 @@ public class Player {
         inventory.addItem(apple);
     }
 
-    public void readContent()
+    public boolean checkItem()
     {
-
+       return inventory.checkForItem(note);
     }
+
+
 }
