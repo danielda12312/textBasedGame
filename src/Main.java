@@ -1,4 +1,5 @@
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -29,13 +30,10 @@ public class Main {
         GameLogic.clearConsole();
 
 
-        Room room1 = new Room("Room1", "An almost empty room with barely any light, only a desk" +
-                " with a mirror attached to it and a note on the desk as well as an exit to the north.");
-        player.setCurrentRoom(room1);
-        System.out.print("You wake up in ");
-        System.out.println(player.getCurrentRoom().getDescription());
+        GameLogic.setupWorld(player);
 
-        System.out.println("(For list of commands type \"commands\")");
+
+
 
 
 
@@ -48,13 +46,10 @@ public class Main {
             player.setNote(note);
 
             //TODO: finish how i can go between rooms.
-            Room room2 = new Room("Room2", "Some room description.");
-            room1.setExit(Direction.NORTH, room2);
-            room2.setExit(Direction.SOUTH, room1);
 
-            Room nextRoom = room1.getExit(Direction.NORTH);
 
-            System.out.println("You enter: " + room2.getName());
+
+
             processInput(input, player);
 
         }
@@ -76,8 +71,27 @@ public class Main {
                 break;
             case "go north":
                 GameLogic.clearConsole();
-                System.out.println("You tried to move north but hit a wall.");
+                Room nextRoom = player.getCurrentRoom().getExit(Direction.NORTH);
+                if (player.getCurrentRoom().getExit(Direction.NORTH) != null)
+                {
+                    player.setCurrentRoom(nextRoom);
+                    System.out.println("You have entered: " + player.getCurrentRoom().getName());
+                }else {
+                    System.out.println("You tried to move north but hit a wall.");
+                }
+
                 // learn how to make movement smarter and more dynamic.
+                break;
+            case "go south":
+                GameLogic.clearConsole();
+                nextRoom = player.getCurrentRoom().getExit(Direction.SOUTH);
+                if (player.getCurrentRoom().getExit(Direction.SOUTH) != null)
+                {
+                    player.setCurrentRoom(nextRoom);
+                    System.out.println("You have entered: " + player.getCurrentRoom().getName());
+                }else {
+                    System.out.println("You cant go that way.");
+                }
                 break;
             case "commands":
                 GameLogic.clearConsole();

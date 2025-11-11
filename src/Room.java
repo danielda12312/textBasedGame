@@ -1,14 +1,16 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Room {
-    private final String name;
-    private final String description;
-    private final HashMap<Direction, Room> exits = new HashMap<>();
+    private String name;
+    private String description;
+    private Map<Direction, Room> exits = new HashMap<>();
 
     public Room(String name,String description)
     {
         this.description = description;
         this.name = name;
+        this.exits = new HashMap<>();
     }
 
     public Room getExit(Direction dir)
@@ -29,5 +31,6 @@ public class Room {
     public String getDescription() {
         return description;
     }
+
 
 }
