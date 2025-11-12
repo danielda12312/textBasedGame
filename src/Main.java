@@ -133,9 +133,6 @@ public class Main {
                 System.out.println("You have " + hp + " Health.");
                 break;
 
-            default:
-                System.out.println("I don't understand your command.");
-                break;
         }
     }
 }

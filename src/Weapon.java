@@ -1,12 +1,14 @@
 public abstract class Weapon extends Item{
     private final int damage;
     private final double weight;
+    private final String type;
 
-    public Weapon(String name, int quantity, String type, int damage, double weight)
+    public Weapon(String name, int quantity,  int damage, double weight, String type)
     {
-        super(name, quantity, type);
+        super(name, quantity);
         this.damage = damage;
         this.weight = weight;
+        this.type = type;
     }
 
     int getDamage()
@@ -17,6 +19,11 @@ public abstract class Weapon extends Item{
     double getWeight()
     {
         return weight;
+    }
+
+    String getType()
+    {
+        return type;
     }
 
 

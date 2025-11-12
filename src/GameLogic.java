@@ -41,8 +41,8 @@ public class GameLogic {
         player.setCurrentRoom(room1);
         System.out.print("You wake up in ");
         System.out.println(player.getCurrentRoom().getDescription());
-        Dagger dagger = new Dagger("dagger", 1, "dagger", 5, 0.6);
-        Food apple = new Food("apple", 1,"fruit", 10);
+        Dagger dagger = new Dagger("dagger", 1,  0.6, 6, "dagger");
+        Food apple = new Food("apple", 1, 10);
         room1.getRoomInventory().addItem(dagger);
         room1.getRoomInventory().addItem(apple);
 

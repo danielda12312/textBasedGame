@@ -1,15 +1,14 @@
 public abstract class Item {
     private final String name;
-    private int quantity;
-    private final String type;
+    private double quantity;
+
 
 
     //The constructor allows us to create an Item object in Main so we can use its attributes and methods.
-    public Item(String name, int quantity, String type)
+    public Item(String name, double quantity)
     {
         this.name = name;
         this.quantity = quantity;
-        this.type = type;
     }
 
     public String getName()
@@ -17,14 +16,11 @@ public abstract class Item {
         return name;
     }
 
-    public int getQuantity()
+    public double getQuantity()
     {
         return quantity;
     }
 
-    public String getType(){
-        return type;
-    }
 
     public abstract void displayInfo();
 

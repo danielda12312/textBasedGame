@@ -1,7 +1,7 @@
 public class Dagger extends Weapon {
-    public Dagger(String name, int quantity, String type, int damage, double weight)
+    public Dagger(String name, int quantity, double weight , int damage, String type)
     {
-        super(name, quantity, type, damage, weight);
+        super(name, quantity, damage, weight, type);
     }
 
     @Override

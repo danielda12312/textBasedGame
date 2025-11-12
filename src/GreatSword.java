@@ -1,13 +1,13 @@
 public class GreatSword extends Weapon{
 
-    public GreatSword(String name, int quantity, String type, int damage, double weight)
+    public GreatSword(String name, int quantity, int damage, double weight, String type)
     {
-        super(name, quantity, type, damage, weight);
+        super(name, quantity, damage, weight, type);
     }
 
     @Override
     public void displayInfo() {
         System.out.println("Weapon: " + getName() + ", Quantity: " + getQuantity()
-                + ", Type: " + getType() + ", Damage: " + getDamage() + ", Weight: " + getWeight() + "Kg");
+               + ", Damage: " + getDamage() + ", Weight: " + getWeight() + "Kg");
     }
 }
