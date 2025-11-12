@@ -72,6 +72,7 @@ public class Player {
     {
         Scanner scanner = new Scanner(System.in);
         GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
+        System.out.print(">> ");
         name = scanner.nextLine();
         setName(name);
         setHp(100);

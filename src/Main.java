@@ -10,6 +10,7 @@ public class Main {
 
         GameLogic.printHeader("THE FORGOTTEN CHAMBERS");
         GameLogic.anythingToContinue();
+
         GameLogic.clearConsole();
         Main game = new Main();
 
@@ -17,51 +18,30 @@ public class Main {
     }
 
     public void startGame() {
-        //TODO: Maybe* add an input function inside GameLogic class to handle all inputs from user.
         Scanner scanner = new Scanner(System.in);
         Player player = new Player();
-
-
         player.playerSetup();
         System.out.println("\nWelcome " + player.getName());
 
+        System.out.print(">> ");
         GameLogic.anythingToContinue();
         GameLogic.clearConsole();
 
         GameLogic.setupWorld(player);
+        System.out.println("From the shadows, an old man steps forward. His robes are torn, his eyes wild yet filled with knowing.\n");
 
+        System.out.println("\"Another one awakens,\" he whispers. \"The dungeon feeds on the lost... and it seems you've been chosen.\"");
+        System.out.println("\"No one remembers how they arrived here. The walls shift, the torches die, and the whispers grow louder with each passing hour.\"");
+        System.out.println("\"Demons guard the exits. Puzzles lock the way. And something far older watches from beneath.\"\n");
+
+        System.out.println("He gestures toward the desk, his voice trembling:");
+        System.out.println("\"Take what you can. Every choice matters in this place.\"");
+        System.out.println("\"If confusion grips you, type 'commands' — it may remind you how to survive.\"");
+        System.out.println("\"Now go... before it finds us.\"\n");
 
         while (running) {
+            System.out.print(">> ");
             String input = scanner.nextLine();
-
-            //take input from player to pick up something from current room
-            if (input.startsWith("take ")) {
-                String itemName = input.substring(5).trim();
-                Item itemToTake = player.getCurrentRoom().getRoomInventory().getItem(itemName);
-
-                if (itemToTake != null)
-                {
-                    player.getCurrentRoom().getRoomInventory().removeItem(itemToTake);
-                    player.getInventory().addItem(itemToTake);
-                    System.out.println("You picked up the " + itemToTake.getName() + ".");
-                }else {
-                    System.out.println("There is no such item here.");
-                }
-            }
-
-            //Equip Weapon from inventory.
-            if (input.startsWith("equip ")) {
-                String itemName = input.substring(6).trim();
-                Item itemToEquip = player.getInventory().getItem(itemName);
-
-                if (itemToEquip != null) {
-                    player.equip(itemToEquip);
-                } else {
-                    System.out.println("You don't have " + itemName + " in your inventory.");
-                }
-            }
-
-
 
 
             processInput(input, player);
@@ -72,14 +52,43 @@ public class Main {
     private void processInput(String input, Player player) {
         String command = input.toLowerCase().trim();
 
+        //take input from player to pick up something from current room
+        if (input.startsWith("take ")) {
+            String itemName = input.substring(5).trim();
+            Item itemToTake = player.getCurrentRoom().getRoomInventory().getItem(itemName);
+
+            if (itemToTake != null)
+            {
+                player.getCurrentRoom().getRoomInventory().removeItem(itemToTake);
+                player.getInventory().addItem(itemToTake);
+                System.out.println("You picked up the " + itemToTake.getName() + ".");
+            }else {
+                System.out.println("There is no such item here.");
+            }
+        }
+
+        //Equip Weapon from inventory.
+        if (input.startsWith("equip ")) {
+            String itemName = input.substring(6).trim();
+            Item itemToEquip = player.getInventory().getItem(itemName);
+
+            if (itemToEquip != null) {
+                player.equip(itemToEquip);
+            } else {
+                System.out.println("You don't have " + itemName + " in your inventory.");
+            }
+        }
+
+        //TODO: Do go <DIRECTION> commands dynamically instead of switch cases.
+        //TODO: Set up first simple puzzle to go to he next room. first check if i do it in while loop or in the process input function,
+        //TODO: specifically the go <DIRECTION> command
 
         switch (command) {
             case "look around":
                 GameLogic.clearConsole();
                 System.out.println("You carefully examine your surroundings and you see ");
-                //Learn how to show each description based on players "Location".
-                System.out.println("Room number: " + player.getCurrentRoom().getName());
                 System.out.println(player.getCurrentRoom().getDescription());
+                System.out.println("");
                 break;
             case "go north":
                 GameLogic.clearConsole();
@@ -106,7 +115,8 @@ public class Main {
             case "commands":
                 GameLogic.clearConsole();
                 System.out.println("Commands: ");
-                System.out.println(" 1. Look around\n 2. go north\n 3. commands\n 4. quit\n 5. name\n 6. weapon");
+                System.out.println(" 1. Look around | go north/south/west/east |  commands | quit | name | weapon |");
+                System.out.println(" 2. inventory | hp | take (item name) | equip (item name) |");
                 break;
             case "quit":
                 running = false;
@@ -132,7 +142,9 @@ public class Main {
                 int hp = player.getHp();
                 System.out.println("You have " + hp + " Health.");
                 break;
-
+            default:
+                System.out.println("Unknown command.");
+                break;
         }
     }
 }
