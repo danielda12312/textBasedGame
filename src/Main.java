@@ -24,9 +24,9 @@ public class Main {
 
         player.playerSetup();
         System.out.println("\nWelcome " + player.getName());
+
         GameLogic.anythingToContinue();
         GameLogic.clearConsole();
-
 
         GameLogic.setupWorld(player);
 
@@ -34,8 +34,34 @@ public class Main {
         while (running) {
             String input = scanner.nextLine();
 
+            //take input from player to pick up something from current room
+            if (input.startsWith("take ")) {
+                String itemName = input.substring(5).trim();
+                Item itemToTake = player.getCurrentRoom().getRoomInventory().getItem(itemName);
 
-            //TODO: finish how i can go between rooms.
+                if (itemToTake != null)
+                {
+                    player.getCurrentRoom().getRoomInventory().removeItem(itemToTake);
+                    player.getInventory().addItem(itemToTake);
+                    System.out.println("You picked up the " + itemToTake.getName() + ".");
+                }else {
+                    System.out.println("There is no such item here.");
+                }
+            }
+
+            //Equip Weapon from inventory.
+            if (input.startsWith("equip ")) {
+                String itemName = input.substring(6).trim();
+                Item itemToEquip = player.getInventory().getItem(itemName);
+
+                if (itemToEquip != null) {
+                    player.equip(itemToEquip);
+                } else {
+                    System.out.println("You don't have " + itemName + " in your inventory.");
+                }
+            }
+
+
 
 
             processInput(input, player);
@@ -106,26 +132,7 @@ public class Main {
                 int hp = player.getHp();
                 System.out.println("You have " + hp + " Health.");
                 break;
-            //TODO: Maybe add a case for "read note" here or just make an if else statement in game loop.
-            case "pick up note":
-                GameLogic.clearConsole();
-                if(Objects.equals(player.getCurrentRoom().getName(), "Room1") && player.checkItem())
-                {
-                    player.pickUpItem(player.getNote());
-                }else
-                {
-                    System.out.println("There is nothing to pick up");
-                }
-                break;
-            case "read note":
-                GameLogic.clearConsole();
-                if(!player.checkItem()) {
-                    player.getNote().displayContent();
-                }else {
-                    System.out.println("You dont have that item.");
-                }
 
-                break;
             default:
                 System.out.println("I don't understand your command.");
                 break;

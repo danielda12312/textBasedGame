@@ -26,15 +26,33 @@ public class Inventory {
         }
     }
 
-    public boolean removeItem(Item item)
+    //A method used to help in the logic of picking up the item in the while loop game. a Look up method.
+    public Item getItem(String itemName)
+    {
+        for (Item item : items)
+        {
+            if(item.getName().equalsIgnoreCase(itemName))
+                return item;
+        }
+        return null;
+    }
+
+    public void removeItem(Item item)
+    {
+        items.remove(item);
+    }
+
+    //A method
+    //TODO: Need to make it so when i drop an item it drops in the current room the player is in.
+    public void dropItem(Item item)
     {
         if(items.remove(item))
         {
             System.out.println(item.getName() + " removed from the inventory.");
-            return true;
+
         }else {
             System.out.println(item.getName() + " not found in the inventory.");
-            return false;
+
         }
     }
 
@@ -50,12 +68,4 @@ public class Inventory {
         }
     }
 
-    public boolean checkForItem(Note note)
-    {
-        for (Item item: items) {
-            if (Objects.equals(item , note))
-                return false;
-        }
-        return true;
-    }
 }

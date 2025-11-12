@@ -41,8 +41,11 @@ public class GameLogic {
         player.setCurrentRoom(room1);
         System.out.print("You wake up in ");
         System.out.println(player.getCurrentRoom().getDescription());
-        Note note = new Note("note", 1 , "paper", "The exit is to the north");
-        player.setNote(note);
+        Dagger dagger = new Dagger("dagger", 1, "dagger", 5, 0.6);
+        Food apple = new Food("apple", 1,"fruit", 10);
+        room1.getRoomInventory().addItem(dagger);
+        room1.getRoomInventory().addItem(apple);
+
         System.out.println("(For list of commands type \"commands\")");
 
         Room room2 = new Room("Room2", "Some room description.");

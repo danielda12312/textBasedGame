@@ -6,7 +6,7 @@ public class Player {
     private Inventory inventory;
     private Weapon currentWeapon;
     private Room currentRoom;
-    private Note note;
+
 
     public Player()
     {
@@ -33,9 +33,11 @@ public class Player {
         return currentRoom;
     }
 
-    public Note getNote()
+
+
+    public Inventory getInventory()
     {
-        return note;
+        return inventory;
     }
 
     public void setName(String name)
@@ -58,21 +60,6 @@ public class Player {
         this.hp = hp;
     }
 
-    public void setNote(Note note)
-    {
-        this.note = note;
-    }
-
-    public void pickUpItem(Item item)
-    {
-        System.out.println(name + " attempts to pickup " + item.getName());
-        inventory.addItem(item);
-    }
-
-    public void removeItem(Item item)
-    {
-        System.out.println(name + " attempts to drop " + item.getName());
-    }
 
     public void checkInventory()
     {
@@ -80,6 +67,7 @@ public class Player {
         inventory.displayInventory();
     }
 
+    //A function to set up the player when first starting the game. ( set HP and choose name )
     public void playerSetup()
     {
         Scanner scanner = new Scanner(System.in);
@@ -87,17 +75,20 @@ public class Player {
         name = scanner.nextLine();
         setName(name);
         setHp(100);
-
-        Dagger dagger = new Dagger("Dagger", 1, "dagger", 10, 0.6);
-        setCurrentWeapon(dagger);
-        Food apple = new Food("Apple", 2, "fuji", 10);
-        inventory.addItem(apple);
     }
 
-    public boolean checkItem()
-    {
-       return inventory.checkForItem(note);
+    // a function that allows the user to equip weapons from inventory.
+    //Maybe add later unequip the current weapon and equip the one in the room instead.
+    public void equip(Item item) {
+        if (item instanceof Weapon) {
+            currentWeapon = (Weapon) item;
+            inventory.removeItem(currentWeapon);
+            System.out.println("You have equipped " + currentWeapon + ".");
+        } else {
+            System.out.println("You can't equip " + item.getName() + ".");
+        }
     }
+
 
 
 }

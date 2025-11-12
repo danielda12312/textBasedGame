@@ -5,12 +5,14 @@ public class Room {
     private String name;
     private String description;
     private Map<Direction, Room> exits = new HashMap<>();
+    private Inventory roomInventory;
 
     public Room(String name,String description)
     {
         this.description = description;
         this.name = name;
         this.exits = new HashMap<>();
+        this.roomInventory = new Inventory();
     }
 
     public Room getExit(Direction dir)
@@ -30,6 +32,11 @@ public class Room {
 
     public String getDescription() {
         return description;
+    }
+
+    public Inventory getRoomInventory()
+    {
+        return roomInventory;
     }
 
 

@@ -19,6 +19,7 @@ public abstract class Weapon extends Item{
         return weight;
     }
 
+
     @Override
     public abstract void displayInfo();
 }
