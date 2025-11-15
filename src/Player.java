@@ -8,9 +8,12 @@ public class Player {
     private Room currentRoom;
 
 
-    public Player()
+    public Player(Room startingRoom, String name)
     {
+        this.currentRoom = startingRoom;
         this.inventory = new Inventory();
+        this.hp = 100;
+        this.name = name;
     }
 
     public int getHp()
@@ -67,16 +70,6 @@ public class Player {
         inventory.displayInventory();
     }
 
-    //A function to set up the player when first starting the game. ( set HP and choose name )
-    public void playerSetup()
-    {
-        Scanner scanner = new Scanner(System.in);
-        GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
-        System.out.print(">> ");
-        name = scanner.nextLine();
-        setName(name);
-        setHp(100);
-    }
 
     // a function that allows the user to equip weapons from inventory.
     //Maybe add later unequip the current weapon and equip the one in the room instead.
