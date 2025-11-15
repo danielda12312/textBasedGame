@@ -65,7 +65,7 @@ public class GameLogic {
     {
         String command = input.toLowerCase().trim();
 
-        //take input from player to pick up something from current room
+        //Take input from player to pick up something from current room
         if (input.startsWith("take ")) {
             String itemName = input.substring(5).trim();
             Item itemToTake = player.getCurrentRoom().getRoomInventory().getItem(itemName);
@@ -95,15 +95,12 @@ public class GameLogic {
         }
 
         //TODO: Do go <DIRECTION> commands dynamically instead of switch cases.
-        //TODO: Set up first simple puzzle to go to he next room. first check if i do it in while loop or in the process input function,
-        //TODO: specifically the go <DIRECTION> command
 
         switch (command) {
             case "look around":
                 GameLogic.clearConsole();
                 System.out.println("You carefully examine your surroundings and you see ");
                 System.out.println(player.getCurrentRoom().getDescription());
-                System.out.println("");
                 break;
             case "go north":
                 GameLogic.clearConsole();
@@ -120,6 +117,26 @@ public class GameLogic {
                 GameLogic.clearConsole();
                 nextRoom = player.getCurrentRoom().getExit(Direction.SOUTH);
                 if (player.getCurrentRoom().getExit(Direction.SOUTH) != null) {
+                    player.setCurrentRoom(nextRoom);
+                    System.out.println("You have entered: " + player.getCurrentRoom().getName());
+                } else {
+                    System.out.println("You cant go that way.");
+                }
+                break;
+            case "go west":
+                GameLogic.clearConsole();
+                nextRoom = player.getCurrentRoom().getExit(Direction.WEST);
+                if (player.getCurrentRoom().getExit(Direction.WEST) != null) {
+                    player.setCurrentRoom(nextRoom);
+                    System.out.println("You have entered: " + player.getCurrentRoom().getName());
+                } else {
+                    System.out.println("You cant go that way.");
+                }
+                break;
+            case "go east":
+                GameLogic.clearConsole();
+                nextRoom = player.getCurrentRoom().getExit(Direction.EAST);
+                if (player.getCurrentRoom().getExit(Direction.EAST) != null) {
                     player.setCurrentRoom(nextRoom);
                     System.out.println("You have entered: " + player.getCurrentRoom().getName());
                 } else {

@@ -10,7 +10,7 @@ public class Food extends Item{
     @Override
     public void displayInfo()
     {
-        System.out.println("Food: " + getName() + ", Quantity: " + getQuantity());
+        System.out.println("Food: " + getName() + " | Quantity: " + getQuantity());
     }
 
 
