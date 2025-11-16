@@ -1,29 +1,14 @@
 import java.util.Scanner;
 
-public class Player {
-    private String name;
-    private int hp;
+public class Player extends Entity{
     private Inventory inventory;
     private Weapon currentWeapon;
-    private Room currentRoom;
 
 
-    public Player(Room startingRoom, String name)
+    public Player(int maxHp, int defence, Room startingRoom, String name)
     {
-        this.currentRoom = startingRoom;
+        super(name, maxHp, defence, startingRoom );
         this.inventory = new Inventory();
-        this.hp = 100;
-        this.name = name;
-    }
-
-    public int getHp()
-    {
-        return hp;
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     public Weapon getCurrentWeapon()
@@ -31,21 +16,9 @@ public class Player {
         return currentWeapon;
     }
 
-    public Room getCurrentRoom()
-    {
-        return currentRoom;
-    }
-
-
-
     public Inventory getInventory()
     {
         return inventory;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
     }
 
     public void setCurrentWeapon(Weapon currentWeapon)
@@ -53,20 +26,10 @@ public class Player {
         this.currentWeapon = currentWeapon;
     }
 
-    public void setCurrentRoom(Room currentRoom)
-    {
-        this.currentRoom = currentRoom;
-    }
-
-    public void setHp(int hp)
-    {
-        this.hp = hp;
-    }
-
 
     public void checkInventory()
     {
-        System.out.println("\n" + name + "'s Inventory: ");
+        System.out.println("\n" + getName() + "'s Inventory: ");
         inventory.displayInventory();
     }
 

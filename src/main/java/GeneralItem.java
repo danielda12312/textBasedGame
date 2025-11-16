@@ -15,6 +15,6 @@ public class GeneralItem extends Item{
 
     @Override
     public void displayInfo() {
-        System.out.println("Name: " + getName() + " Quantity: " + getQuantity() + " Description: " + getItemDescription());
+        System.out.println("Name: " + getName() + " | Quantity: " + getQuantity() + " | Description: " + getItemDescription());
     }
 }

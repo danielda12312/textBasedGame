@@ -23,7 +23,7 @@ public class Main {
         GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
         System.out.print(">> ");
         String name = scanner.nextLine();
-        Player player = new Player(world.getStartRoom(), name);
+        Player player = new Player(100, 10, world.getStartRoom(), name);
         GameLogic.clearConsole();
 
         System.out.println("\nWelcome " + player.getName() + " to THE FORGOTTEN CHAMBERS.");

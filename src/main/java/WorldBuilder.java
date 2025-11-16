@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 public class WorldBuilder {
 
+    //A function to load room descriptions for resources folder.
     private String loadDescription(String fileName)
     {
         try {
@@ -20,19 +21,21 @@ public class WorldBuilder {
 
         // TODO: Make a JSON file with all Rooms including Descriptions, names, items and exits.
 
-
+        //Initialize Room objects.
         Room firstCell = new Room("The First Cell", loadDescription("first_cell"));
         Room hallway1 = new Room("Hallway - first section", loadDescription("hallway"));
         Room hallway2 = new Room("Hallway - mid section", loadDescription("hallway"));
         Room hallway3 = new Room("Hallway - last section", loadDescription("hallway"));
         Room room3 = new Room("Room3", "ADD DESCRIPTION");
 
+        //Add rooms to the world.
         world.addRoom("firstCell", firstCell);
         world.addRoom("Hallway1", hallway1);
         world.addRoom("Hallway2", hallway2);
         world.addRoom("Hallway3", hallway3);
         world.addRoom("Room3", room3);
 
+        //Set exits for all the rooms.
         firstCell.setExit(Direction.NORTH, hallway1);
         hallway1.setExit(Direction.SOUTH, firstCell);
         hallway1.setExit(Direction.NORTH, hallway2);
@@ -45,8 +48,7 @@ public class WorldBuilder {
 
         room3.setExit(Direction.EAST, hallway3);
 
-
-
+        //Put objects to pickup inside the rooms.
         Weapon dagger = new Weapon("Bronze Dagger", "Dagger", 1 , 10);
         Food apple = new Food("apple", 1, 10);
         GeneralItem note = new GeneralItem("note", 1, "an old folded note");
@@ -56,6 +58,10 @@ public class WorldBuilder {
         firstCell.getRoomInventory().addItem(note);
 
         // --- Later: Add mobs ---
+        Mob goblin = new Mob("Goblin", 50, 5, hallway3,5,
+                "A sneaky little creature with pointy ears and green skin.");
+        hallway3.addMob(goblin);
+
         world.setStartRoom(firstCell);
 
         return world;
