@@ -47,6 +47,11 @@ public class Room {
         mobs.add(mob);
     }
 
+    public void removeMob(Mob mob)
+    {
+        mobs.remove(mob);
+    }
+
     public List<Mob> getMobs()
     {
         return mobs;

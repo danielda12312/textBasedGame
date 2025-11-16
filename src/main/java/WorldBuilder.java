@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 public class WorldBuilder {
 
+
     //A function to load room descriptions for resources folder.
     private String loadDescription(String fileName)
     {
@@ -58,9 +59,11 @@ public class WorldBuilder {
         firstCell.getRoomInventory().addItem(note);
 
         // --- Later: Add mobs ---
-        Mob goblin = new Mob("Goblin", 50, 5, hallway3,5,
+        Mob goblin = new Mob("Goblin", 10, 5, hallway2,15,
                 "A sneaky little creature with pointy ears and green skin.");
-        hallway3.addMob(goblin);
+        hallway2.addMob(goblin);
+
+
 
         world.setStartRoom(firstCell);
 
