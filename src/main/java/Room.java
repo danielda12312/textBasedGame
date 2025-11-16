@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Room {
@@ -6,6 +8,7 @@ public class Room {
     private String description;
     private Map<Direction, Room> exits = new HashMap<>();
     private Inventory roomInventory;
+    private List<Mob> mobs = new ArrayList<>();
 
     public Room(String name,String description)
     {
@@ -37,6 +40,16 @@ public class Room {
     public Inventory getRoomInventory()
     {
         return roomInventory;
+    }
+
+    public void addMob(Mob mob)
+    {
+        mobs.add(mob);
+    }
+
+    public List<Mob> getMobs()
+    {
+        return mobs;
     }
 
 
