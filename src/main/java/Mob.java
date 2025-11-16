@@ -18,4 +18,11 @@ public class Mob extends Entity {
     {
         this.attackDamage = attackDamage;
     }
+
+    public void attack(Entity target)
+    {
+        int damageDealt = Math.max(0, attackDamage - target.getDefence());
+        target.takeDamage(damageDealt);
+        System.out.println(getName() + " attacks " + target.getName() + " for " + damageDealt + " damage!");
+    }
 }

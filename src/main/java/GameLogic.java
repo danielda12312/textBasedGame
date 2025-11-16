@@ -1,7 +1,15 @@
 import java.util.Scanner;
 
 public class GameLogic {
+    private Player player;
+    private World world;
+    private CombatManager combatManager;
 
+    public GameLogic(Player player, World world, CombatManager combatManager) {
+        this.player = player;
+        this.world = world;
+        this.combatManager = combatManager;
+    }
     private static boolean running = true;
 
     public static void clearConsole()
@@ -61,7 +69,8 @@ public class GameLogic {
         return running;
     }
 
-    public static void processInput(String input, Player player)
+
+    public void processInput(String input, Player player, Scanner scanner)
     {
         String command = input.toLowerCase().trim();
 
@@ -94,7 +103,13 @@ public class GameLogic {
             return;
         }
 
-        //TODO: Do go <DIRECTION> commands dynamically instead of switch cases.
+        if (!player.getCurrentRoom().getMobs().isEmpty())
+        {
+            Mob mob = player.getCurrentRoom().getMobs().getFirst();
+            combatManager.startCombat(mob, scanner);
+        }
+
+        //TODO: Reorganize cases inside switch and update commands case.
 
         switch (command) {
             case "look around":

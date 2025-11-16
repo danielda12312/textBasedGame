@@ -20,24 +20,29 @@ public class Main {
         //Create all rooms and a player object, set the player in the first room.
         World world = new WorldBuilder().build();
 
+
+
         GameLogic.printHeader("CHOOSE A NAME FOR YOUR CHARACTER");
         System.out.print(">> ");
         String name = scanner.nextLine();
         Player player = new Player(100, 10, world.getStartRoom(), name);
         GameLogic.clearConsole();
 
+        CombatManager combatManager = new CombatManager(player);
+
         System.out.println("\nWelcome " + player.getName() + " to THE FORGOTTEN CHAMBERS.");
         GameLogic.anythingToContinue();
         GameLogic.clearConsole();
 
         GameLogic.initialPrint();
+        GameLogic gameLogic = new GameLogic(player, world, combatManager);
 
         while (GameLogic.isRunning()) {
             System.out.print(">> ");
             String input = scanner.nextLine();
 
 
-            GameLogic.processInput(input, player);
+            gameLogic.processInput(input, player, scanner);
 
         }
     }
