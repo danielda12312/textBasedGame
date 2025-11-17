@@ -50,13 +50,12 @@ public class WorldBuilder {
         room3.setExit(Direction.EAST, hallway3);
 
         //Put objects to pickup inside the rooms.
-        Weapon dagger = new Weapon("Bronze Dagger", "Dagger", 1 , 10);
-        Food apple = new Food("apple", 1, 10);
-        GeneralItem note = new GeneralItem("note", 1, "an old folded note");
+        Weapon dagger = new Weapon("Bronze Dagger", "Dagger", "A weak dagger made of bronze." , 10);
+        Consumable potion = new Consumable("Potion","A potion that restores health.", 10);
 
+        firstCell.getRoomInventory().addItem(potion);
         firstCell.getRoomInventory().addItem(dagger);
-        firstCell.getRoomInventory().addItem(apple);
-        firstCell.getRoomInventory().addItem(note);
+
 
         // --- Later: Add mobs ---
         Mob goblin = new Mob("Goblin", 10, 5, hallway2,15,

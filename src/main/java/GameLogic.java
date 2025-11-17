@@ -1,13 +1,9 @@
 import java.util.Scanner;
 
 public class GameLogic {
-    private Player player;
-    private World world;
     private CombatManager combatManager;
 
-    public GameLogic(Player player, World world, CombatManager combatManager) {
-        this.player = player;
-        this.world = world;
+    public GameLogic(CombatManager combatManager) {
         this.combatManager = combatManager;
     }
     private static boolean running = true;
@@ -73,10 +69,11 @@ public class GameLogic {
     public void processInput(String input, Player player, Scanner scanner)
     {
         String command = input.toLowerCase().trim();
+        String itemName;
 
         //Take input from player to pick up something from current room
         if (input.startsWith("take ")) {
-            String itemName = input.substring(5).trim();
+            itemName = input.substring(5).trim();
             Item itemToTake = player.getCurrentRoom().getRoomInventory().getItem(itemName);
 
             if (itemToTake != null)
@@ -92,7 +89,7 @@ public class GameLogic {
 
         //Equip Weapon from inventory.
         if (input.startsWith("equip ")) {
-            String itemName = input.substring(6).trim();
+            itemName = input.substring(6).trim();
             Item itemToEquip = player.getInventory().getItem(itemName);
 
             if (itemToEquip != null) {
@@ -103,13 +100,32 @@ public class GameLogic {
             return;
         }
 
+        if (input.startsWith("use "))
+        {
+            itemName = input.substring(4).trim();
+            Item itemToUse = player.getInventory().getItem(itemName);
+
+            if (itemToUse == null) {
+                System.out.println("You dont have \"" + itemName + "\".");
+                return;
+            }
+
+            if (itemToUse instanceof Consumable consumable){
+                consumable.use(player);
+                player.getInventory().removeItem(itemToUse);
+            } else {
+                System.out.println("You cant use " + itemName + ".");
+            }
+            return;
+        }
+
+        //Check if the room the player currently is inside has a mob if yes, invoke startCombat function inside CombatManager.
         if (!player.getCurrentRoom().getMobs().isEmpty())
         {
             Mob mob = player.getCurrentRoom().getMobs().getFirst();
             combatManager.startCombat(mob, scanner);
         }
 
-        //TODO: Reorganize cases inside switch and update commands case.
 
         switch (command) {
             case "look around":
@@ -158,15 +174,6 @@ public class GameLogic {
                     System.out.println("You cant go that way.");
                 }
                 break;
-            case "commands":
-                GameLogic.clearConsole();
-                System.out.println("Commands: ");
-                System.out.println(" 1. Look around | go north/south/west/east |  commands | quit | name | weapon |");
-                System.out.println(" 2. inventory | hp | take (item name) | equip (item name) |");
-                break;
-            case "quit":
-                running = false;
-                break;
             case "name":
                 GameLogic.clearConsole();
                 System.out.println("Your name is: " + player.getName());
@@ -187,6 +194,15 @@ public class GameLogic {
                 GameLogic.clearConsole();
                 int hp = player.getHp();
                 System.out.println("You have " + hp + " Health.");
+                break;
+            case "quit":
+                running = false;
+                break;
+            case "commands":
+                GameLogic.clearConsole();
+                System.out.println("Commands: ");
+                System.out.println(" 1. Look around | go north/south/west/east |  commands | quit | name | weapon (in-hands) |");
+                System.out.println(" 2. inventory | hp | take (item name) | equip (item name) |");
                 break;
             default:
                 System.out.println("Unknown command.");

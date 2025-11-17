@@ -8,6 +8,9 @@ public class CombatManager {
         this.player = player;
     }
 
+
+    //a function to handle a simple combat for an encounter with one mob.
+    //TODO: Think of a way to make the combat more engaging and less repetitive.
     public void startCombat(Mob mob, Scanner scanner)
     {
         System.out.println("You encounter a " + mob.getName() + "!" );
@@ -20,23 +23,26 @@ public class CombatManager {
 
             switch (input) {
                 case "attack":
-                    int damage = player.getCurrentWeapon().getDamage() - mob.getDefence();
-                    mob.takeDamage(damage);
-                    System.out.println("You hit " + mob.getName() + " for " + damage + " damage.");
+                    if(player.getCurrentWeapon() == null) {
+                        System.out.println("You have no weapon in hands !");
+                    } else {
+                        int damage = player.getCurrentWeapon().getDamage() - mob.getDefence();
+                        mob.takeDamage(damage);
+                        System.out.println("You hit " + mob.getName() + " for " + damage + " damage.");
 
-                    if (!mob.isAlive()) {
-                        System.out.println("You defeated " + mob.getName() + "!");
-                        combatRunning = false;
-                        player.getCurrentRoom().removeMob(mob);
-                        break;
-                    }
+                        if (!mob.isAlive()) {
+                            System.out.println("You defeated " + mob.getName() + "!");
+                            combatRunning = false;
+                            player.getCurrentRoom().removeMob(mob);
+                            break;
+                        }
 
-                    mob.attack(player);
+                        mob.attack(player);
 
-                    if(!player.isAlive())
-                    {
-                        System.out.println("You died!");
-                        combatRunning = false;
+                        if (!player.isAlive()) {
+                            System.out.println("You died!");
+                            combatRunning = false;
+                        }
                     }
                     break;
 

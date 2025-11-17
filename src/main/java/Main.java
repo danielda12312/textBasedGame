@@ -35,7 +35,7 @@ public class Main {
         GameLogic.clearConsole();
 
         GameLogic.initialPrint();
-        GameLogic gameLogic = new GameLogic(player, world, combatManager);
+        GameLogic gameLogic = new GameLogic(combatManager);
 
         while (GameLogic.isRunning()) {
             System.out.print(">> ");
