@@ -52,9 +52,11 @@ public class WorldBuilder {
         //Put objects to pickup inside the rooms.
         Weapon dagger = new Weapon("Bronze Dagger", "Dagger", "A weak dagger made of bronze." , 10);
         Consumable potion = new Consumable("Potion","A potion that restores health.", 10);
+        ReadableItem note = new ReadableItem("note","An old dusty note", "The exit is to the north, at the end of the hallway.");
 
         firstCell.getRoomInventory().addItem(potion);
         firstCell.getRoomInventory().addItem(dagger);
+        firstCell.getRoomInventory().addItem(note);
 
 
         // --- Later: Add mobs ---

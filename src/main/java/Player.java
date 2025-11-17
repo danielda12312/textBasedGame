@@ -46,6 +46,7 @@ public class Player extends Entity{
         }
     }
 
+    //a function to us inside Consumable class to heal with a potion
     public void heal(int amount)
     {
         int newHp = Math.min(getMaxHp(), getHp() + amount );

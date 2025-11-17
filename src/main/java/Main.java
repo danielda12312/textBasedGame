@@ -1,6 +1,8 @@
 
 import java.util.Scanner;
 
+//TODO : make a ReadableItem class.
+
 public class Main {
 
     public static void main(String[] args) {
