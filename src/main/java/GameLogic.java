@@ -71,10 +71,12 @@ public class GameLogic {
         String command = input.toLowerCase().trim();
         String itemName;
 
-        //Take input from player to pick up something from current room
+        //Take input from player to pick up an item from current room
         if (input.startsWith("take ")) {
             itemName = input.substring(5).trim();
             Item itemToTake = player.getCurrentRoom().getRoomInventory().getItem(itemName);
+
+            //TODO: add an if that takes weapon straight to hands if nothing is equipped else to inventory.
 
             if (itemToTake != null)
             {
@@ -100,13 +102,14 @@ public class GameLogic {
             return;
         }
 
+        // Use item from consumable class (e.g. use potion -> heals the player.)
         if (input.startsWith("use "))
         {
             itemName = input.substring(4).trim();
             Item itemToUse = player.getInventory().getItem(itemName);
 
             if (itemToUse == null) {
-                System.out.println("You dont have \"" + itemName + "\".");
+                System.out.println("You don't have \"" + itemName + "\".");
                 return;
             }
 
@@ -115,6 +118,24 @@ public class GameLogic {
                 player.getInventory().removeItem(itemToUse);
             } else {
                 System.out.println("You cant use " + itemName + ".");
+            }
+            return;
+        }
+
+        if (input.startsWith("read "))
+        {
+            itemName = input.substring(5).trim();
+            Item itemToRead = player.getInventory().getItem(itemName);
+
+            if (itemToRead == null) {
+                System.out.println("You don't have \"" + itemName + "\".");
+                return;
+            }
+
+            if (itemToRead instanceof ReadableItem readableItem) {
+                readableItem.use(player);
+            } else {
+                System.out.println("You cant read " + itemName);
             }
             return;
         }

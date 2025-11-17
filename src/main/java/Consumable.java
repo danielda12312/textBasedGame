@@ -13,6 +13,7 @@ public class Consumable extends Item{
         System.out.println("Item: " + getName() + " restores " + healAmount + " health.");
     }
 
+    //A function that uses heal function inside player to heal.
     public void use(Player player)
     {
         player.heal(healAmount);
