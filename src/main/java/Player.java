@@ -46,6 +46,10 @@ public class Player extends Entity{
         }
     }
 
-
+    public void heal(int amount)
+    {
+        int newHp = Math.min(getMaxHp(), getHp() + amount );
+        setHp(newHp);
+    }
 
 }

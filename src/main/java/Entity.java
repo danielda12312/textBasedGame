@@ -49,6 +49,11 @@ public abstract class Entity {
         return currentRoom;
     }
 
+    public void setHp(int hp)
+    {
+        this.hp = hp;
+    }
+
     public void setCurrentRoom(Room room)
     {
         this.currentRoom = room;

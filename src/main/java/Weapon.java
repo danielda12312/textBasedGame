@@ -5,9 +5,9 @@ public class Weapon extends Item{
     private final int damage;
     private final String type;
 
-    public Weapon(String name,  String type, int quantity,  int damage)
+    public Weapon(String name,  String type, String description,  int damage)
     {
-        super(name, quantity);
+        super(name, description);
         this.damage = damage;
         this.type = type;
     }
@@ -26,4 +26,10 @@ public class Weapon extends Item{
     public void displayInfo() {
         System.out.println("Weapon: " + getName() + " | Type: " + getType() + " | Damage: " + getDamage());
     }
+
+    @Override
+    public void use(Player player) {
+        player.equip(this);
+    }
+
 }
