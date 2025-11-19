@@ -19,10 +19,24 @@ public class Mob extends Entity {
         this.attackDamage = attackDamage;
     }
 
+    public String getMobDescription()
+    {
+        return mobDescription;
+    }
+
     public void attack(Entity target)
     {
-        int damageDealt = Math.max(0, attackDamage - target.getDefence());
-        target.takeDamage(damageDealt);
-        System.out.println(getName() + " attacks " + target.getName() + " for " + damageDealt + " damage!");
+        int lowerBound = attackDamage - target.getDefence();
+        int upperBound = attackDamage;
+        int randomInt = (int) (Math.random() * (upperBound - lowerBound + 1) + lowerBound);
+        int damageDealt = Math.max(0, randomInt);
+        if (damageDealt > 10)
+        {
+            target.takeDamage(damageDealt);
+            System.out.println(getName() + " attacks " + target.getName() + " for " + damageDealt + " critical damage!");
+        }else {
+            target.takeDamage(damageDealt);
+            System.out.println(getName() + " attacks " + target.getName() + " for " + damageDealt + " damage!");
+        }
     }
 }

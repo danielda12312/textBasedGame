@@ -13,11 +13,17 @@ public class CombatManager {
     //TODO: Think of a way to make the combat more engaging and less repetitive.
     public void startCombat(Mob mob, Scanner scanner)
     {
+        GameLogic.clearConsole();
         System.out.println("You encounter a " + mob.getName() + "!" );
+        System.out.println(mob.getMobDescription());
         boolean combatRunning = true;
 
 
         while(combatRunning) {
+            System.out.println();
+            System.out.println(player.getName() + "'s health: " + player.getHp());
+            System.out.println(mob.getName() + "'s health: " + mob.getHp());
+            System.out.println();
             System.out.println("Enter a command (attack, run)");
             String input = scanner.nextLine().trim().toLowerCase();
 
@@ -37,6 +43,16 @@ public class CombatManager {
                             break;
                         }
 
+                        System.out.println(mob.getName() + "'s turn:");
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                            Thread.currentThread().interrupt();
+                            System.err.println("Thread was interrupted during sleep");
+                            throw new RuntimeException(e);
+                        }
                         mob.attack(player);
 
                         if (!player.isAlive()) {
