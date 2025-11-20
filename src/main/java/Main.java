@@ -30,7 +30,8 @@ public class Main {
         Player player = new Player(100, 10, world.getStartRoom(), name);
         GameLogic.clearConsole();
 
-        CombatManager combatManager = new CombatManager(player);
+        Mob mob = world.getStartRoom().getMob();
+        CombatManager combatManager = new CombatManager(player, mob);
 
         System.out.println("\nWelcome " + player.getName() + " to THE FORGOTTEN CHAMBERS.");
         GameLogic.anythingToContinue();
@@ -44,7 +45,7 @@ public class Main {
             String input = scanner.nextLine();
 
 
-            gameLogic.processInput(input, player, scanner);
+            gameLogic.processInput(input, player);
 
         }
     }

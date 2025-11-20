@@ -57,5 +57,12 @@ public class Room {
         return mobs;
     }
 
-
+    public Mob getMob()
+    {
+        if(mobs.isEmpty())
+        {
+            return null;
+        }
+        return mobs.get(0);
+    }
 }
