@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class GameLogic {
     private CombatManager combatManager;
+    private GameState state = GameState.EXPLORATION;
 
     public GameLogic(CombatManager combatManager) {
         this.combatManager = combatManager;
@@ -65,8 +66,24 @@ public class GameLogic {
         return running;
     }
 
+    public enum GameState {
+        EXPLORATION,
+        COMBAT
+    }
 
-    public void processInput(String input, Player player, Scanner scanner)
+    public void startCombat(Mob mob, Player player)
+    {
+        GameLogic.clearConsole();
+        System.out.println("You encounter a " + mob.getName() + "!");
+        System.out.println(mob.getMobDescription());
+
+        System.out.println("Choose an action (attack, run):");
+
+        combatManager = new CombatManager(player, mob);
+        state = GameState.COMBAT;
+    }
+
+    public void handleExplorationInput(String input, Player player)
     {
         String command = input.toLowerCase().trim();
         String itemName;
@@ -144,7 +161,7 @@ public class GameLogic {
         if (!player.getCurrentRoom().getMobs().isEmpty())
         {
             Mob mob = player.getCurrentRoom().getMobs().getFirst();
-            combatManager.startCombat(mob, scanner);
+            startCombat(mob,player);
         }
 
 
@@ -229,6 +246,23 @@ public class GameLogic {
                 System.out.println("Unknown command.");
                 break;
         }
+    }
+
+
+    public void processInput(String input, Player player)
+    {
+        if (state == GameState.COMBAT) {
+            combatManager.handleCombatInput(input);
+
+            if (combatManager.isCombatFinished()) {
+                state = GameState.EXPLORATION;
+            }
+
+            return;
+        }
+
+        // EXPLORATION MODE
+        handleExplorationInput(input, player);
     }
 
 }
